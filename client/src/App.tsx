@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Landing from "@/pages/landing";
 import TeacherDashboard from "@/pages/teacher-dashboard";
 import CreateExam from "@/pages/create-exam";
+import EditExam from "@/pages/edit-exam";
 import StudentLogin from "@/pages/student-login";
 import ExamInterface from "@/pages/exam-interface";
 import GradeManagement from "@/pages/grade-management";
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/" component={Landing} />
       <Route path="/teacher" component={TeacherDashboard} />
       <Route path="/teacher/create-exam" component={CreateExam} />
+      <Route path="/teacher/edit-exam" component={EditExam} />
       <Route path="/teacher/grades" component={GradeManagement} />
       <Route path="/student" component={StudentLogin} />
       <Route path="/student/exam" component={ExamInterface} />

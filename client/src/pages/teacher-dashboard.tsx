@@ -1,19 +1,58 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Plus, BarChart3, FolderOpen, BookOpen, User, FileText } from "lucide-react";
 import { Storage } from "@/lib/storage";
 import { Exam } from "@/lib/exam-types";
+import { useToast } from "@/hooks/use-toast";
 
 export default function TeacherDashboard() {
   const [, setLocation] = useLocation();
   const [recentExams, setRecentExams] = useState<Exam[]>([]);
+  const { toast } = useToast();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const exams = Storage.getExams();
     setRecentExams(exams.slice(-5).reverse()); // Show last 5 exams
   }, []);
+
+  const handleLoadExam = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file || !file.name.endsWith('.question')) {
+      toast({
+        title: "Error",
+        description: "Please select a valid .question file",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      const exam = await Storage.importExamFromFile(file);
+      Storage.saveExam(exam);
+      
+      toast({
+        title: "Success",
+        description: "Exam loaded successfully for editing",
+      });
+
+      // Refresh recent exams list
+      const exams = Storage.getExams();
+      setRecentExams(exams.slice(-5).reverse());
+      
+      // Navigate to edit the exam
+      setLocation('/teacher/edit-exam');
+      
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to load exam file",
+        variant: "destructive"
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -94,15 +133,28 @@ export default function TeacherDashboard() {
 
           <Card className="hover:shadow-md transition-all duration-200 cursor-pointer group">
             <CardContent className="p-6">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <FolderOpen className="text-white" />
+              <Button
+                variant="ghost"
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full h-auto p-0 justify-start"
+              >
+                <div className="flex items-center space-x-4 text-left w-full">
+                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <FolderOpen className="text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-slate-800">Load Exam</h3>
+                    <p className="text-sm text-slate-600">Import existing exam file</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-slate-800">Load Exam</h3>
-                  <p className="text-sm text-slate-600">Import existing exam file</p>
-                </div>
-              </div>
+              </Button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".question"
+                onChange={handleLoadExam}
+                className="hidden"
+              />
             </CardContent>
           </Card>
         </div>

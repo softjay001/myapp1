@@ -39,7 +39,7 @@ export class ExamUtils {
         const answerSet = new Set(answer.map(a => a.toLowerCase().trim()));
         const correctSet = new Set(correctAnswers.map(c => c.toLowerCase().trim()));
         return answerSet.size === correctSet.size && 
-               [...answerSet].every(a => correctSet.has(a));
+               Array.from(answerSet).every(a => correctSet.has(a));
       
       case 'image':
         return typeof answer === 'string' && 
@@ -58,8 +58,9 @@ export class ExamUtils {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   }
 
-  static calculateTimeSpent(startTime: Date, endTime: Date): number {
-    return Math.round((endTime.getTime() - startTime.getTime()) / (1000 * 60));
+  static calculateTimeSpent(startTime: Date | string, endTime: Date): number {
+    const start = typeof startTime === 'string' ? new Date(startTime) : startTime;
+    return Math.round((endTime.getTime() - start.getTime()) / (1000 * 60));
   }
 
   static validatePassword(provided: string, required: string): boolean {

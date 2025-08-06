@@ -105,8 +105,9 @@ export default function ExamResults() {
                   <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Trophy className="text-white text-3xl" />
                   </div>
-                  <h2 className="text-3xl font-bold text-slate-800 mb-2">Exam Completed!</h2>
-                  <p className="text-xl text-slate-600 mb-8">{result.examTitle}</p>
+                  <h2 className="text-3xl font-bold text-slate-800 mb-2">Exam Submitted Successfully!</h2>
+                  <p className="text-xl text-slate-600 mb-4">{result.examTitle}</p>
+                  <p className="text-lg text-slate-600 mb-8">You may leave the hall. Thank you for taking the exam.</p>
                   
                   <div className="grid md:grid-cols-3 gap-6 mb-8">
                     <div className="text-center">

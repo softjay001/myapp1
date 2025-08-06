@@ -14,15 +14,16 @@ import { useToast } from "@/hooks/use-toast";
 interface QuestionBuilderProps {
   onSave: (question: Question) => void;
   onCancel: () => void;
+  initialQuestion?: Question | null;
 }
 
-export default function QuestionBuilder({ onSave, onCancel }: QuestionBuilderProps) {
+export default function QuestionBuilder({ onSave, onCancel, initialQuestion }: QuestionBuilderProps) {
   const { toast } = useToast();
-  const [questionType, setQuestionType] = useState<QuestionType>('mcq');
-  const [questionText, setQuestionText] = useState('');
-  const [options, setOptions] = useState(['', '', '', '']);
-  const [correctAnswers, setCorrectAnswers] = useState<string[]>([]);
-  const [points, setPoints] = useState(1);
+  const [questionType, setQuestionType] = useState<QuestionType>(initialQuestion?.type || 'mcq');
+  const [questionText, setQuestionText] = useState(initialQuestion?.text || '');
+  const [options, setOptions] = useState(initialQuestion?.options || ['', '', '', '']);
+  const [correctAnswers, setCorrectAnswers] = useState<string[]>(initialQuestion?.correctAnswers || []);
+  const [points, setPoints] = useState(initialQuestion?.points || 1);
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleSave = () => {
@@ -45,13 +46,13 @@ export default function QuestionBuilder({ onSave, onCancel }: QuestionBuilderPro
     }
 
     const question: Question = {
-      id: ExamUtils.generateId(),
+      id: initialQuestion?.id || ExamUtils.generateId(),
       type: questionType,
       text: questionText,
       options: needsOptions() ? options.filter(opt => opt.trim()) : undefined,
       correctAnswers,
       points,
-      image: imageFile ? URL.createObjectURL(imageFile) : undefined
+      image: imageFile ? URL.createObjectURL(imageFile) : (initialQuestion?.image || undefined)
     };
 
     onSave(question);
@@ -245,7 +246,7 @@ export default function QuestionBuilder({ onSave, onCancel }: QuestionBuilderPro
               Cancel
             </Button>
             <Button onClick={handleSave} className="bg-primary hover:bg-blue-700">
-              Add Question
+              {initialQuestion ? 'Update Question' : 'Add Question'}
             </Button>
           </div>
         </div>
