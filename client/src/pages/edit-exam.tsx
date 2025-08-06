@@ -38,7 +38,7 @@ export default function EditExam() {
     }
   }, []);
 
-  const handleSaveExam = async () => {
+  const handleSaveExam = () => {
     if (!examTitle.trim()) {
       toast({
         title: "Error",
@@ -86,15 +86,11 @@ export default function EditExam() {
     };
 
     Storage.saveExam(updatedExam);
-    
-    const filename = `${updatedExam.title.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}.question`;
-    const savedToFolder = await ExamUtils.exportToQuestionsFolder(updatedExam, filename);
+    Storage.exportExamToFile(updatedExam);
     
     toast({
       title: "Success",
-      description: savedToFolder 
-        ? "Exam updated and saved to questions folder"
-        : "Exam updated and downloaded successfully",
+      description: "Exam updated and exported successfully",
     });
 
     setLocation('/teacher');

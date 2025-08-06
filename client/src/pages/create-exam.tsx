@@ -22,7 +22,7 @@ export default function CreateExam() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [showQuestionBuilder, setShowQuestionBuilder] = useState(false);
 
-  const handleSaveExam = async () => {
+  const handleSaveExam = () => {
     if (!examTitle.trim()) {
       toast({
         title: "Error",
@@ -70,15 +70,11 @@ export default function CreateExam() {
     };
 
     Storage.saveExam(exam);
-    
-    const filename = `${exam.title.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}.question`;
-    const savedToFolder = await ExamUtils.exportToQuestionsFolder(exam, filename);
+    Storage.exportExamToFile(exam);
     
     toast({
       title: "Success",
-      description: savedToFolder 
-        ? "Exam saved to questions folder successfully"
-        : "Exam saved and downloaded successfully",
+      description: "Exam saved and exported successfully",
     });
 
     // Reset form
