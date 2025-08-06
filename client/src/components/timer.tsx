@@ -30,8 +30,15 @@ export default function Timer({ initialTime, onTimeUp, className = "" }: TimerPr
     return () => clearInterval(timer);
   }, [timeLeft, onTimeUp]);
 
+  // Calculate if 70% of time is consumed (30% remaining)
+  const timeConsumedPercentage = ((initialTime - timeLeft) / initialTime) * 100;
+  const isTimeRunningOut = timeConsumedPercentage >= 70;
+
+  // Dynamic color classes
+  const colorClass = isTimeRunningOut ? "text-red-600" : "text-green-600";
+  
   return (
-    <span className={className}>
+    <span className={`${colorClass} ${className}`}>
       {ExamUtils.formatTime(timeLeft)}
     </span>
   );

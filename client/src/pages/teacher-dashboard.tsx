@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Plus, BarChart3, FolderOpen, BookOpen, User, FileText } from "lucide-react";
 import { Storage } from "@/lib/storage";
+import { ExamUtils } from "@/lib/exam-utils";
 import { Exam } from "@/lib/exam-types";
 import { useToast } from "@/hooks/use-toast";
 
@@ -17,6 +18,45 @@ export default function TeacherDashboard() {
     const exams = Storage.getExams();
     setRecentExams(exams.slice(-5).reverse()); // Show last 5 exams
   }, []);
+
+  const handleLoadExamClick = async () => {
+    try {
+      const files = await ExamUtils.openQuestionsFolder();
+      if (!files || files.length === 0) return;
+
+      const file = files[0];
+      if (!file.name.endsWith('.question')) {
+        toast({
+          title: "Error",
+          description: "Please select a valid .question file",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      const exam = await Storage.importExamFromFile(file);
+      Storage.saveExam(exam);
+      
+      toast({
+        title: "Success",
+        description: `Loaded exam: ${exam.title}`,
+      });
+
+      // Refresh recent exams list
+      const exams = Storage.getExams();
+      setRecentExams(exams.slice(-5).reverse());
+      
+      // Navigate to edit the exam
+      setLocation('/teacher/edit-exam');
+      
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to load exam file from questions folder",
+        variant: "destructive"
+      });
+    }
+  };
 
   const handleLoadExam = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -135,7 +175,7 @@ export default function TeacherDashboard() {
             <CardContent className="p-6">
               <Button
                 variant="ghost"
-                onClick={() => fileInputRef.current?.click()}
+                onClick={handleLoadExamClick}
                 className="w-full h-auto p-0 justify-start"
               >
                 <div className="flex items-center space-x-4 text-left w-full">

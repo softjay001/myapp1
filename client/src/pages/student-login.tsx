@@ -152,6 +152,8 @@ export default function StudentLogin() {
                   onChange={(e) => setExamPassword(e.target.value)}
                   placeholder="Enter exam access password"
                   className="mt-2 px-4 py-3"
+                  autoComplete="new-password"
+                  data-form-type="other"
                 />
               </div>
               

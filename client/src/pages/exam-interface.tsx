@@ -2,6 +2,16 @@ import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { ClipboardList, User } from "lucide-react";
 import { Storage } from "@/lib/storage";
 import { ExamUtils } from "@/lib/exam-utils";
@@ -20,6 +30,7 @@ export default function ExamInterface() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<StudentAnswer[]>([]);
   const [timeRemaining, setTimeRemaining] = useState(0);
+  const [showSubmitDialog, setShowSubmitDialog] = useState(false);
 
   useEffect(() => {
     const sessionData = Storage.getSession();
@@ -52,6 +63,10 @@ export default function ExamInterface() {
     }
   };
 
+  const confirmSubmit = () => {
+    setShowSubmitDialog(true);
+  };
+
   const handleSubmitExam = () => {
     if (!exam || !session) return;
 
@@ -73,6 +88,7 @@ export default function ExamInterface() {
 
     Storage.saveResult(result);
     Storage.clearSession();
+    setShowSubmitDialog(false);
     
     setLocation('/results');
   };
@@ -113,11 +129,11 @@ export default function ExamInterface() {
                 <Timer
                   initialTime={timeRemaining}
                   onTimeUp={handleTimeUp}
-                  className="text-lg font-bold text-red-600"
+                  className="text-lg font-bold"
                 />
               </div>
               <Button
-                onClick={handleSubmitExam}
+                onClick={confirmSubmit}
                 className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
               >
                 Submit Exam
@@ -183,6 +199,28 @@ export default function ExamInterface() {
           </div>
         </div>
       </main>
+
+      {/* Submit Confirmation Dialog */}
+      <AlertDialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Submit Exam</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to submit your exam? This action cannot be undone. 
+              Once submitted, you will not be able to make any changes to your answers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleSubmitExam}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              Yes, Submit Exam
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
