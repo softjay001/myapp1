@@ -1,0 +1,947 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impetus Dominion Academy CBT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    'inter': ['Inter', 'sans-serif'],
+                },
+                colors: {
+                    primary: {
+                        50: '#eff6ff',
+                        100: '#dbeafe',
+                        200: '#bfdbfe',
+                        300: '#93c5fd',
+                        400: '#60a5fa',
+                        500: '#3b82f6',
+                        600: '#2563eb',
+                        700: '#1d4ed8',
+                        800: '#1e40af',
+                        900: '#1e3a8a',
+                    }
+                }
+            }
+        }
+    };
+    </script>
+    <style>
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .timer-pulse { animation: pulse 1s infinite; }
+    </style>
+</head>
+<body class="font-inter bg-slate-50 text-slate-900">
+    <!-- Landing Page -->
+    <div id="landing-page" class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-slate-900">Impetus Dominion Academy</h1>
+                            <p class="text-sm text-slate-500">Computer-Based Testing System</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-slate-900 mb-4">Choose Your Portal</h2>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto">Access the Computer-Based Testing system as a teacher to create and manage exams, or as a student to take assessments.</p>
+            </div>
+
+            <!-- Portal Selection Cards -->
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Teacher Portal -->
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-shadow duration-300 cursor-pointer" onclick="showTeacherDashboard()">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-chalkboard-teacher text-primary-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3">Teacher Portal</h3>
+                        <p class="text-slate-600 mb-6">Create exams, manage questions, view student results and analytics.</p>
+                        <ul class="text-left text-sm text-slate-600 space-y-2 mb-8">
+                            <li class="flex items-center"><i class="fas fa-check text-primary-500 mr-2"></i> Create & manage exams</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-500 mr-2"></i> Multiple question types</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-500 mr-2"></i> View grades & analytics</li>
+                            <li class="flex items-center"><i class="fas fa-check text-primary-500 mr-2"></i> Export results to CSV</li>
+                        </ul>
+                        <button class="w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-colors">
+                            Enter Teacher Portal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Student Portal -->
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-shadow duration-300 cursor-pointer" onclick="showStudentInterface()">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-user-graduate text-emerald-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3">Student Portal</h3>
+                        <p class="text-slate-600 mb-6">Take exams with timer, navigate questions, and view results instantly.</p>
+                        <ul class="text-left text-sm text-slate-600 space-y-2 mb-8">
+                            <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2"></i> Take timed exams</li>
+                            <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2"></i> Multiple question formats</li>
+                            <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2"></i> Instant results</li>
+                            <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2"></i> Progress tracking</li>
+                        </ul>
+                        <button class="w-full bg-emerald-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-emerald-700 transition-colors">
+                            Enter Student Portal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Teacher Dashboard -->
+    <div id="teacher-dashboard" class="min-h-screen hidden">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-chalkboard-teacher text-white text-sm"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-lg font-bold text-slate-900">Teacher Dashboard</h1>
+                            <p class="text-sm text-slate-500">Impetus Dominion Academy CBT</p>
+                        </div>
+                    </div>
+                    <button onclick="showLandingPage()" class="text-slate-500 hover:text-slate-700">
+                        <i class="fas fa-home mr-2"></i> Home
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Dashboard Actions -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <button onclick="showCreateExam()" class="bg-primary-600 text-white p-6 rounded-xl hover:bg-primary-700 transition-colors text-left">
+                    <i class="fas fa-plus-circle text-2xl mb-3 block"></i>
+                    <h3 class="font-semibold text-lg mb-2">Create New Exam</h3>
+                    <p class="text-primary-100 text-sm">Design a new exam with custom questions</p>
+                </button>
+
+                <button onclick="showLoadExam()" class="bg-white border-2 border-slate-200 p-6 rounded-xl hover:border-primary-300 transition-colors text-left">
+                    <i class="fas fa-folder-open text-primary-600 text-2xl mb-3 block"></i>
+                    <h3 class="font-semibold text-lg mb-2 text-slate-900">Load Exam for Grades</h3>
+                    <p class="text-slate-600 text-sm">View student results and analytics</p>
+                </button>
+
+                <button onclick="showLandingPage()" class="bg-white border-2 border-slate-200 p-6 rounded-xl hover:border-red-300 transition-colors text-left">
+                    <i class="fas fa-sign-out-alt text-red-500 text-2xl mb-3 block"></i>
+                    <h3 class="font-semibold text-lg mb-2 text-slate-900">Exit to Home</h3>
+                    <p class="text-slate-600 text-sm">Return to main portal selection</p>
+                </button>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <h3 class="text-lg font-semibold text-slate-900 mb-4">Recent Exams</h3>
+                <div class="space-y-3" data-mock="true">
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-file-alt text-primary-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-slate-900">Mathematics Quiz - Chapter 5</p>
+                                <p class="text-sm text-slate-500">Created 2 days ago • 24 students</p>
+                            </div>
+                        </div>
+                        <button class="text-primary-600 hover:text-primary-700 text-sm font-medium">View Results</button>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-file-alt text-primary-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-slate-900">English Literature Final</p>
+                                <p class="text-sm text-slate-500">Created 1 week ago • 18 students</p>
+                            </div>
+                        </div>
+                        <button class="text-primary-600 hover:text-primary-700 text-sm font-medium">View Results</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Exam Interface -->
+    <div id="create-exam" class="min-h-screen hidden">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <button onclick="showTeacherDashboard()" class="text-slate-500 hover:text-slate-700">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <div>
+                            <h1 class="text-lg font-bold text-slate-900">Create New Exam</h1>
+                            <p class="text-sm text-slate-500">Design your exam questions and settings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Exam Settings Form -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+                <h3 class="text-lg font-semibold text-slate-900 mb-6">Exam Settings</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Exam Title</label>
+                        <input type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Enter exam title..." data-mock="true" value="Mathematics Quiz - Chapter 5">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Exam Timer (minutes)</label>
+                        <input type="number" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="60" data-mock="true" value="45">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Student Password</label>
+                        <input type="password" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Password for exam access" data-mock="true" value="math2024">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Grade Password</label>
+                        <input type="password" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Password to view grades" data-mock="true" value="teacher123">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Question Section -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-slate-900">Add Questions</h3>
+                    <div class="text-sm text-slate-500">
+                        <span data-bind="questions.length" data-mock="true">3</span> questions added
+                    </div>
+                </div>
+
+                <!-- Question Type Selection -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Question Type</label>
+                    <select class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" onchange="updateQuestionForm(this.value)">
+                        <option value="mcq">Multiple Choice (MCQ)</option>
+                        <option value="truefalse">True/False</option>
+                        <option value="fillblank">Fill in the Blank</option>
+                        <option value="checkbox">Checkbox (Multiple Answers)</option>
+                        <option value="image">Image Question</option>
+                        <option value="subjective">Subjective (Text)</option>
+                    </select>
+                </div>
+
+                <!-- Question Form -->
+                <div id="question-form">
+                    <!-- MCQ Form (Default) -->
+                    <div id="mcq-form" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Question Text</label>
+                            <textarea class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" rows="3" placeholder="Enter your question..." data-mock="true">What is the value of x in the equation 2x + 5 = 15?</textarea>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Option A</label>
+                                <input type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Option A" data-mock="true" value="x = 5">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Option B</label>
+                                <input type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Option B" data-mock="true" value="x = 10">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Option C</label>
+                                <input type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Option C" data-mock="true" value="x = 7">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Option D</label>
+                                <input type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Option D" data-mock="true" value="x = 15">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Correct Answer</label>
+                            <select class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                <option value="A" selected>Option A</option>
+                                <option value="B">Option B</option>
+                                <option value="C">Option C</option>
+                                <option value="D">Option D</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-6">
+                    <button class="px-4 py-2 text-slate-600 hover:text-slate-800 font-medium">
+                        <i class="fas fa-trash mr-2"></i>Clear Form
+                    </button>
+                    <button class="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 font-medium">
+                        <i class="fas fa-plus mr-2"></i>Add Question
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question List -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+                <h3 class="text-lg font-semibold text-slate-900 mb-4">Questions Added</h3>
+                <div class="space-y-3" data-mock="true">
+                    <div class="flex items-center justify-between p-4 border border-slate-200 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-semibold text-sm">1</div>
+                            <div>
+                                <p class="font-medium text-slate-900">What is the value of x in the equation 2x + 5 = 15?</p>
+                                <p class="text-sm text-slate-500">MCQ • Correct Answer: A</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="text-slate-400 hover:text-slate-600"><i class="fas fa-edit"></i></button>
+                            <button class="text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-4 border border-slate-200 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-semibold text-sm">2</div>
+                            <div>
+                                <p class="font-medium text-slate-900">The square root of 64 is 8.</p>
+                                <p class="text-sm text-slate-500">True/False • Correct Answer: True</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="text-slate-400 hover:text-slate-600"><i class="fas fa-edit"></i></button>
+                            <button class="text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-4 border border-slate-200 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-semibold text-sm">3</div>
+                            <div>
+                                <p class="font-medium text-slate-900">Complete the formula: a² + b² = ___</p>
+                                <p class="text-sm text-slate-500">Fill in the Blank • Correct Answer: c²</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="text-slate-400 hover:text-slate-600"><i class="fas fa-edit"></i></button>
+                            <button class="text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save Exam -->
+            <div class="flex justify-center">
+                <button onclick="saveExam()" class="px-8 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-semibold text-lg">
+                    <i class="fas fa-save mr-2"></i>Save Exam & Export File
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Interface -->
+    <div id="student-interface" class="min-h-screen hidden">
+        <!-- Student Login -->
+        <div id="student-login" class="min-h-screen flex items-center justify-center p-4">
+            <div class="max-w-md w-full">
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-graduate text-emerald-600 text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">Student Login</h2>
+                        <p class="text-slate-600 mt-2">Enter your details to access the exam</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Student Name <span class="text-red-500">*</span></label>
+                            <input type="text" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent" placeholder="Enter your full name" data-mock="true" value="John Smith">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Exam Password <span class="text-red-500">*</span></label>
+                            <input type="password" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent" placeholder="Enter exam password" data-mock="true" value="math2024">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Select Exam File</label>
+                            <div class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 transition-colors">
+                                <div class="space-y-1 text-center">
+                                    <i class="fas fa-file-alt text-slate-400 text-3xl"></i>
+                                    <div class="text-sm text-slate-600">
+                                        <button class="text-emerald-600 hover:text-emerald-500 font-medium">Browse for .question file</button>
+                                    </div>
+                                    <p class="text-xs text-slate-500">Select exam file from teacher</p>
+                                </div>
+                            </div>
+                            <div class="mt-2 text-sm text-slate-600" data-mock="true">
+                                <i class="fas fa-check text-emerald-500 mr-1"></i> mathematics-quiz-ch5.question
+                            </div>
+                        </div>
+
+                        <button onclick="startExam()" class="w-full bg-emerald-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-emerald-700 transition-colors">
+                            Load Exam & Start
+                        </button>
+
+                        <div class="text-center">
+                            <button onclick="showLandingPage()" class="text-slate-500 hover:text-slate-700 text-sm">
+                                <i class="fas fa-arrow-left mr-1"></i> Back to Home
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Taking Interface -->
+        <div id="exam-interface" class="hidden">
+            <!-- Exam Header -->
+            <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div>
+                                <h1 class="text-lg font-bold text-slate-900" data-bind="exam.title" data-mock="true">Mathematics Quiz - Chapter 5</h1>
+                                <p class="text-sm text-slate-500">Student: <span data-bind="student.name" data-mock="true">John Smith</span></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Timer -->
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2 bg-amber-50 text-amber-700 px-4 py-2 rounded-lg border border-amber-200">
+                                <i class="fas fa-clock timer-pulse"></i>
+                                <span class="font-mono text-lg font-bold" data-bind="timer" data-mock="true">42:35</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-slate-700">Progress</span>
+                        <span class="text-sm text-slate-500" data-mock="true">Question 1 of 3</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-primary-600 h-2 rounded-full transition-all duration-300" style="width: 33%" data-bind="progress"></div>
+                    </div>
+                </div>
+
+                <!-- Question Display -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 mb-8">
+                    <div class="mb-6">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-semibold">1</div>
+                            <span class="text-sm text-slate-500 bg-primary-50 text-primary-700 px-3 py-1 rounded-full">Multiple Choice</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-900 mb-6" data-bind="currentQuestion.text" data-mock="true">
+                            What is the value of x in the equation 2x + 5 = 15?
+                        </h3>
+                    </div>
+
+                    <!-- MCQ Options -->
+                    <div class="space-y-3" data-mock="true">
+                        <label class="flex items-center p-4 border-2 border-slate-200 rounded-lg hover:border-primary-300 cursor-pointer transition-colors">
+                            <input type="radio" name="answer" value="A" class="mr-4 text-primary-600 focus:ring-primary-500">
+                            <div class="flex items-center space-x-3">
+                                <span class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-sm font-medium">A</span>
+                                <span class="text-slate-900">x = 5</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-4 border-2 border-slate-200 rounded-lg hover:border-primary-300 cursor-pointer transition-colors">
+                            <input type="radio" name="answer" value="B" class="mr-4 text-primary-600 focus:ring-primary-500">
+                            <div class="flex items-center space-x-3">
+                                <span class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-sm font-medium">B</span>
+                                <span class="text-slate-900">x = 10</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-4 border-2 border-slate-200 rounded-lg hover:border-primary-300 cursor-pointer transition-colors">
+                            <input type="radio" name="answer" value="C" class="mr-4 text-primary-600 focus:ring-primary-500">
+                            <div class="flex items-center space-x-3">
+                                <span class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-sm font-medium">C</span>
+                                <span class="text-slate-900">x = 7</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-4 border-2 border-slate-200 rounded-lg hover:border-primary-300 cursor-pointer transition-colors">
+                            <input type="radio" name="answer" value="D" class="mr-4 text-primary-600 focus:ring-primary-500">
+                            <div class="flex items-center space-x-3">
+                                <span class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-sm font-medium">D</span>
+                                <span class="text-slate-900">x = 15</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex items-center justify-between">
+                    <button class="px-6 py-3 text-slate-400 font-medium cursor-not-allowed" disabled>
+                        <i class="fas fa-arrow-left mr-2"></i>Previous
+                    </button>
+                    
+                    <div class="flex items-center space-x-4">
+                        <button class="px-6 py-3 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 font-medium">
+                            Mark for Review
+                        </button>
+                        <button onclick="nextQuestion()" class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 font-medium">
+                            Next <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question Navigation Panel -->
+                <div class="mt-8 bg-slate-50 rounded-xl p-6">
+                    <h4 class="font-semibold text-slate-900 mb-4">Question Navigation</h4>
+                    <div class="flex flex-wrap gap-2" data-mock="true">
+                        <button class="w-10 h-10 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700">1</button>
+                        <button class="w-10 h-10 bg-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-300">2</button>
+                        <button class="w-10 h-10 bg-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-300">3</button>
+                    </div>
+                    <div class="flex items-center justify-between mt-4 text-sm">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-4 bg-primary-600 rounded"></div>
+                                <span class="text-slate-600">Current</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-4 bg-emerald-500 rounded"></div>
+                                <span class="text-slate-600">Answered</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-4 bg-amber-500 rounded"></div>
+                                <span class="text-slate-600">Marked</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-4 bg-slate-200 rounded"></div>
+                                <span class="text-slate-600">Not Visited</span>
+                            </div>
+                        </div>
+                        <button onclick="showSubmitConfirmation()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 font-medium">
+                            Submit Exam
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="exam-results" class="hidden min-h-screen flex items-center justify-center p-4">
+            <div class="max-w-2xl w-full">
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 text-center">
+                    <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-check text-emerald-600 text-3xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-2">Exam Completed!</h2>
+                    <p class="text-slate-600 mb-8">Congratulations on completing your exam</p>
+
+                    <!-- Results Summary -->
+                    <div class="bg-slate-50 rounded-xl p-6 mb-8">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-slate-500 mb-1">Student</p>
+                                <p class="text-lg font-semibold text-slate-900" data-bind="student.name" data-mock="true">John Smith</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500 mb-1">Exam</p>
+                                <p class="text-lg font-semibold text-slate-900" data-bind="exam.title" data-mock="true">Mathematics Quiz - Chapter 5</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500 mb-1">Score</p>
+                                <p class="text-3xl font-bold text-emerald-600" data-bind="score" data-mock="true">85%</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500 mb-1">Time Taken</p>
+                                <p class="text-lg font-semibold text-slate-900" data-mock="true">38:45</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Results -->
+                    <div class="bg-slate-50 rounded-xl p-6 mb-8 text-left">
+                        <h4 class="font-semibold text-slate-900 mb-4 text-center">Question Breakdown</h4>
+                        <div class="space-y-3" data-mock="true">
+                            <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                                <span class="text-slate-700">Question 1: Equation solving</span>
+                                <span class="text-emerald-600 font-medium"><i class="fas fa-check-circle mr-1"></i>Correct</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                                <span class="text-slate-700">Question 2: Square root</span>
+                                <span class="text-emerald-600 font-medium"><i class="fas fa-check-circle mr-1"></i>Correct</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                                <span class="text-slate-700">Question 3: Pythagorean theorem</span>
+                                <span class="text-red-500 font-medium"><i class="fas fa-times-circle mr-1"></i>Incorrect</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Teacher Grade Access -->
+                    <div class="border-t border-slate-200 pt-6">
+                        <h4 class="font-semibold text-slate-900 mb-4">Teacher Grade Access</h4>
+                        <button onclick="showGradeAccess()" class="w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-colors mb-4">
+                            <i class="fas fa-unlock mr-2"></i>View All Grades (Teacher)
+                        </button>
+                        <button onclick="showLandingPage()" class="w-full bg-slate-100 text-slate-700 py-3 px-6 rounded-lg font-semibold hover:bg-slate-200 transition-colors">
+                            Return to Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grade Access Modal -->
+    <div id="grade-access-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl shadow-xl border border-slate-200 p-6 max-w-md w-full">
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-lock text-primary-600 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900">Teacher Access Required</h3>
+                <p class="text-slate-600 mt-2">Enter the grade password to view all results</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Grade Password</label>
+                    <input type="password" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Enter grade password" data-mock="true" value="teacher123">
+                </div>
+
+                <div class="flex space-x-3">
+                    <button onclick="closeGradeAccess()" class="flex-1 px-4 py-2 text-slate-600 hover:text-slate-800 font-medium">Cancel</button>
+                    <button onclick="showGradeAnalytics()" class="flex-1 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 font-medium">Access Grades</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grade Analytics Dashboard -->
+    <div id="grade-analytics" class="min-h-screen hidden">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-chart-bar text-white text-sm"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-lg font-bold text-slate-900">Grade Analytics</h1>
+                            <p class="text-sm text-slate-500" data-bind="exam.title" data-mock="true">Mathematics Quiz - Chapter 5</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium text-sm">
+                            <i class="fas fa-download mr-2"></i>Export CSV
+                        </button>
+                        <button onclick="showLandingPage()" class="text-slate-500 hover:text-slate-700">
+                            <i class="fas fa-home mr-2"></i>Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Class Analytics -->
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-slate-500 mb-1">Average Score</p>
+                            <p class="text-2xl font-bold text-slate-900" data-mock="true">78.5%</p>
+                        </div>
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-chart-line text-blue-600"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-slate-500 mb-1">Highest Score</p>
+                            <p class="text-2xl font-bold text-emerald-600" data-mock="true">95%</p>
+                        </div>
+                        <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-trophy text-emerald-600"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-slate-500 mb-1">Lowest Score</p>
+                            <p class="text-2xl font-bold text-red-600" data-mock="true">45%</p>
+                        </div>
+                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-chart-line-down text-red-600"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-slate-500 mb-1">Total Students</p>
+                            <p class="text-2xl font-bold text-slate-900" data-mock="true">24</p>
+                        </div>
+                        <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-users text-purple-600"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Results Table -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-6 border-b border-slate-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-slate-900">Student Results</h3>
+                        <div class="flex items-center space-x-4">
+                            <div class="relative">
+                                <input type="text" placeholder="Search students..." class="pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th class="text-left py-3 px-6 text-sm font-semibold text-slate-700">Student Name</th>
+                                <th class="text-center py-3 px-6 text-sm font-semibold text-slate-700">Score</th>
+                                <th class="text-center py-3 px-6 text-sm font-semibold text-slate-700">Grade</th>
+                                <th class="text-center py-3 px-6 text-sm font-semibold text-slate-700">Time Taken</th>
+                                <th class="text-center py-3 px-6 text-sm font-semibold text-slate-700">Date</th>
+                                <th class="text-center py-3 px-6 text-sm font-semibold text-slate-700">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200" data-mock="true">
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                            <span class="text-primary-600 font-semibold text-sm">JS</span>
+                                        </div>
+                                        <span class="font-medium text-slate-900">John Smith</span>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="text-lg font-semibold text-emerald-600">85%</span>
+                                </td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-sm font-medium">A</span>
+                                </td>
+                                <td class="py-4 px-6 text-center text-slate-600">38:45</td>
+                                <td class="py-4 px-6 text-center text-slate-600">Today, 2:30 PM</td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm font-medium">Completed</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                            <span class="text-primary-600 font-semibold text-sm">EJ</span>
+                                        </div>
+                                        <span class="font-medium text-slate-900">Emma Johnson</span>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="text-lg font-semibold text-emerald-600">95%</span>
+                                </td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-sm font-medium">A+</span>
+                                </td>
+                                <td class="py-4 px-6 text-center text-slate-600">42:12</td>
+                                <td class="py-4 px-6 text-center text-slate-600">Today, 1:45 PM</td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm font-medium">Completed</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                            <span class="text-primary-600 font-semibold text-sm">MW</span>
+                                        </div>
+                                        <span class="font-medium text-slate-900">Michael Wong</span>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="text-lg font-semibold text-amber-600">72%</span>
+                                </td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm font-medium">B</span>
+                                </td>
+                                <td class="py-4 px-6 text-center text-slate-600">44:30</td>
+                                <td class="py-4 px-6 text-center text-slate-600">Today, 3:15 PM</td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm font-medium">Completed</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                            <span class="text-primary-600 font-semibold text-sm">SD</span>
+                                        </div>
+                                        <span class="font-medium text-slate-900">Sarah Davis</span>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="text-lg font-semibold text-red-600">45%</span>
+                                </td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm font-medium">F</span>
+                                </td>
+                                <td class="py-4 px-6 text-center text-slate-600">28:22</td>
+                                <td class="py-4 px-6 text-center text-slate-600">Today, 4:00 PM</td>
+                                <td class="py-4 px-6 text-center">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm font-medium">Completed</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        
+        (function() {
+            // Page Navigation Functions
+            window.showLandingPage = function() {
+                hideAllPages();
+                document.getElementById('landing-page').classList.remove('hidden');
+            };
+
+            window.showTeacherDashboard = function() {
+                hideAllPages();
+                document.getElementById('teacher-dashboard').classList.remove('hidden');
+            };
+
+            window.showCreateExam = function() {
+                hideAllPages();
+                document.getElementById('create-exam').classList.remove('hidden');
+            };
+
+            window.showStudentInterface = function() {
+                hideAllPages();
+                document.getElementById('student-interface').classList.remove('hidden');
+                document.getElementById('student-login').classList.remove('hidden');
+                document.getElementById('exam-interface').classList.add('hidden');
+                document.getElementById('exam-results').classList.add('hidden');
+            };
+
+            window.startExam = function() {
+                document.getElementById('student-login').classList.add('hidden');
+                document.getElementById('exam-interface').classList.remove('hidden');
+                // TODO: Load exam data and start timer
+            };
+
+            window.nextQuestion = function() {
+                // TODO: Save current answer and load next question
+                console.log('Moving to next question');
+            };
+
+            window.showSubmitConfirmation = function() {
+                if (confirm('Are you sure you want to submit your exam? This action cannot be undone.')) {
+                    submitExam();
+                }
+            };
+
+            function submitExam() {
+                document.getElementById('exam-interface').classList.add('hidden');
+                document.getElementById('exam-results').classList.remove('hidden');
+                // TODO: Calculate score and save results
+            }
+
+            window.showGradeAccess = function() {
+                document.getElementById('grade-access-modal').classList.remove('hidden');
+            };
+
+            window.closeGradeAccess = function() {
+                document.getElementById('grade-access-modal').classList.add('hidden');
+            };
+
+            window.showGradeAnalytics = function() {
+                document.getElementById('grade-access-modal').classList.add('hidden');
+                hideAllPages();
+                document.getElementById('grade-analytics').classList.remove('hidden');
+            };
+
+            window.saveExam = function() {
+                // TODO: Export .question file and clear session
+                alert('Exam saved successfully! File exported to system folder.');
+                showTeacherDashboard();
+            };
+
+            window.updateQuestionForm = function(type) {
+                // TODO: Update form fields based on question type
+                console.log('Question type changed to:', type);
+            };
+
+            function hideAllPages() {
+                const pages = [
+                    'landing-page', 
+                    'teacher-dashboard', 
+                    'create-exam', 
+                    'student-interface', 
+                    'grade-analytics'
+                ];
+                pages.forEach(pageId => {
+                    const page = document.getElementById(pageId);
+                    if (page) page.classList.add('hidden');
+                });
+            }
+
+            // Timer simulation for demo
+            let timeRemaining = 45 * 60; // 45 minutes in seconds
+            function updateTimer() {
+                const timerElement = document.querySelector('[data-bind="timer"]');
+                if (timerElement && !document.getElementById('exam-interface').classList.contains('hidden')) {
+                    const minutes = Math.floor(timeRemaining / 60);
+                    const seconds = timeRemaining % 60;
+                    timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                    
+                    if (timeRemaining > 0) {
+                        timeRemaining--;
+                    } else {
+                        // Auto-submit when time runs out
+                        submitExam();
+                    }
+                }
+            }
+
+            // Update timer every second
+            setInterval(updateTimer, 1000);
+
+            // Initialize page
+            showLandingPage();
+        })();
+    </script>
+</body>
+</html>
