@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
-  "main": "electron.js",
+  "main": "electron.cjs",
   "description": "Offline Windows app built from my web project",
   "author": "Jeremiah",
   "scripts": {
