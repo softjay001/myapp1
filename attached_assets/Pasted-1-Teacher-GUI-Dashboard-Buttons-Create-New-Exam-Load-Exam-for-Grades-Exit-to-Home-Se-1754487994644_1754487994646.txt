@@ -1,0 +1,154 @@
+1. Teacher GUI
+Dashboard
+Buttons:
+
+Create New Exam
+
+Load Exam for Grades
+
+Exit to Home
+
+Set Exam
+Fields:
+
+Exam Title
+
+Exam Timer (minutes)
+
+Student Password (for exam access)
+
+Grade Password (for teacher to unlock grades)
+
+Add Question UI:
+
+Dropdown to select question type:
+
+MCQ
+
+True/False
+
+Fill in the Blank
+
+Checkbox (multiple answers)
+
+Image Question (optional options)
+
+Subjective (text)
+
+Enter Question Text
+
+Upload image if image type
+
+Enter Correct Answer(s)
+
+Save Exam button:
+
+Exports .question file to system folder
+
+Clears current session
+
+View Grades
+Teacher enters Grade Password
+
+Loads exam .question file
+
+Displays:
+
+Student Name | Score | Date
+
+Class Analytics (Average, Max, Min Score)
+
+Export to CSV button for offline record
+
+2. Student GUI
+Login / Verify Identity
+Name (Required)
+
+Exam Password (Must match file)
+
+Load Exam
+File picker opens exam folder
+
+Student selects .question file
+
+If password matches → Start Exam
+
+Exam Screen
+Displays:
+
+Timer Countdown
+
+Question Navigation (Next/Prev)
+
+Question Rendered by Type:
+
+MCQ → radio buttons
+
+True/False → toggle buttons
+
+Checkbox → multiple checkboxes
+
+Fill in the Blank → text input
+
+Image Question → image + options
+
+Subjective → text area (auto-graded by string)
+
+Submit button:
+
+Auto-grades all answers
+
+Saves score to LocalStorage linked to examTitle
+
+Shows Result Screen
+
+Result Screen
+Shows:
+
+Student Name
+
+Score (Auto-calculated)
+
+View Grade Button for Teacher:
+
+Teacher can input Grade Password immediately
+
+Displays grade table + analytics
+
+Score also saved for future teacher view.
+
+cbt-mvp/
+│
+├── index.html        # Landing page (select Teacher/Student)
+├── teacher.html      # Teacher GUI
+├── student.html      # Student GUI
+│
+├── css/
+│   └── style.css
+│
+├── js/
+│   ├── teacher.js    # Create exams, save files, view grades
+│   ├── student.js    # Load exams, take tests, submit answers
+│   ├── storage.js    # Handles LocalStorage for grades
+│   ├── file.js       # Import/export .question files
+│   └── utils.js      # Timer, auto-grading logic
+│
+├── images/           # Optional question images
+│
+└── sample.question   # Example test file
+MVP Complete Features
+Full Teacher/Student GUI
+
+Timer & Auto Submit
+
+All question types including Checkbox & Subjective
+
+Auto-grading for all using exact answer match
+
+Immediate result display with View Grade button for teacher
+
+Grades saved to LocalStorage per exam
+
+.question file workflow for offline exam sharing
+
+Grade password protection
