@@ -1,5 +1,9 @@
-import { type User, type InsertUser } from "@shared/schema";
+import { type User, type InsertUser, users } from "@shared/schema";
 import { randomUUID } from "crypto";
+import { drizzle } from 'drizzle-orm/better-sqlite3';
+import Database from 'better-sqlite3';
+import * as schema from '@shared/schema';
+import { eq } from "drizzle-orm";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -35,4 +39,33 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+class SqliteStorage implements IStorage {
+  private db;
+
+  constructor() {
+    const sqlite = new Database('sqlite.db');
+    this.db = drizzle(sqlite, { schema });
+  }
+
+  async getUser(id: string): Promise<User | undefined> {
+    const result = await this.db.query.users.findFirst({
+      where: eq(users.id, id),
+    });
+    return result;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const result = await this.db.query.users.findFirst({
+      where: eq(users.username, username),
+    });
+    return result;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const result = await this.db.insert(users).values(insertUser).returning();
+    return result[0];
+  }
+}
+
+
+export const storage = new SqliteStorage();
